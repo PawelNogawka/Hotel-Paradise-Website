@@ -1,0 +1,782 @@
+@import "./colors";
+@import "./components";
+@import "./mixins";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-transform: capitalize;
+  font-family: "Open Sans", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  scroll-padding: 5rem;
+}
+
+.header.active {
+  background-color: $secondary;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  transition: 0.6s ease;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  background-color: transparent;
+  z-index: 10000;
+
+  &__logo-link {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $pure-white;
+    text-decoration: none;
+
+    span {
+      color: $main;
+    }
+  }
+
+  &__hamburger-btn {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-flow: column;
+    width: 4.5rem;
+    height: 3rem;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  &__line {
+    width: 100%;
+    height: 0.3rem;
+    background-color: $main;
+    transition: all 0.8s ease;
+  }
+
+  .change &__line--1 {
+    transform: rotateZ(-405deg) translate(-8px, 6px);
+  }
+  .change &__line--3 {
+    transform: rotateZ(405deg) translate(-8px, -6px);
+  }
+
+  .change &__line--2 {
+    opacity: 0;
+  }
+
+  &__nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80vw;
+    height: 100%;
+    border-radius: 20% 0 0 60%;
+    z-index: 100;
+    background-color: $secondary;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .change &__nav {
+    transform: translateX(0);
+  }
+
+  &__navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__link {
+    position: relative;
+    margin: 1.3rem 0;
+    padding: 0.6rem;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    color: $pure-white;
+    text-decoration: none;
+  }
+
+  &__link:hover.header__link::before,
+  &__link:hover.header__link::after {
+    transform: scale(1);
+  }
+  &__link::after,
+  &__link::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    height: 0.3rem;
+    width: 100%;
+    transform: scale(0);
+    background-color: $main;
+    transition: transform 0.3s ease;
+  }
+  &__link::after {
+    top: 0;
+    transform-origin: right;
+  }
+  &__link::before {
+    bottom: 0;
+    transform-origin: left;
+  }
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(
+      308deg,
+      rgba(18, 18, 18, 0.7) 100%,
+      rgba(18, 18, 18, 0.7) 100%
+    ),
+    url("../images/hotel-paradise-small.jpg");
+  background-size: cover;
+  background-position: center;
+
+  &__banner {
+    text-align: center;
+    color: $pure-white;
+    transition: all 0.5s ease;
+  }
+
+  &__name {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: $text-color;
+  }
+  &__heading {
+    position: relative;
+    margin: 1rem 0 2rem 0;
+    font-family: "Oleo Script", cursive;
+    font-size: 3.5rem;
+
+    &::after {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -0.4rem;
+      content: "";
+      width: 10rem;
+      height: 0.4rem;
+      background-color: $main;
+    }
+  }
+
+  &__desc {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    color: $text-color;
+  }
+  &__button {
+    @include button;
+    position: relative;
+    min-width: 15rem;
+    min-height: 4rem;
+    overflow: hidden;
+  }
+
+  &__button:hover .home__btn-text--2 {
+    top: 50%;
+  }
+  &__button:hover .home__btn-text--1 {
+    top: -50%;
+  }
+
+  &__btn-text {
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+    transition: top 0.2s ease;
+  }
+
+  &__btn-text--1 {
+    top: 50%;
+  }
+
+  &__btn-text--2 {
+    top: 150%;
+  }
+}
+
+.book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 15rem;
+  width: 100%;
+  background: linear-gradient(
+      308deg,
+      rgba(237, 144, 101, 0.8) 100%,
+      rgba(237, 144, 101, 0.8) 100%
+    ),
+    url("../images/hotel-booking.jpg") no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  &__input-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    width: 20rem;
+  }
+  &__label {
+    font-size: 1.6rem;
+    margin-bottom: 1.3rem;
+    color: $secondary;
+    font-weight: bolder;
+  }
+  &__input {
+    width: 100%;
+    padding: 1.1rem;
+    outline: none;
+    border: none;
+  }
+  &__btn {
+    @include button;
+    background-color: $secondary;
+    align-self: end;
+    width: 20rem;
+    text-align: center;
+  }
+}
+
+.about {
+  background-color: $secondary;
+  color: $pure-white;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+  &__img-box {
+    flex: 1 1 35rem;
+  }
+  &__img {
+    width: 100%;
+  }
+
+  &__content {
+    flex: 1 1 35rem;
+  }
+
+  &__heading {
+    font-size: 2.2rem;
+  }
+  &__info {
+    margin: 2rem 0 2.5rem 0;
+    font-size: 1.5rem;
+    color: $text-color;
+  }
+  &__btn {
+    @include button;
+    position: relative;
+    transition: 1s;
+    z-index: 2;
+    overflow: hidden;
+  }
+}
+.services {
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  &__service {
+    position: relative;
+    text-align: center;
+    flex: 1 1 26rem;
+  }
+
+  &__img-box {
+    width: 100%;
+    height: 17rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__desc {
+    padding: 5rem 3rem 3rem 3rem;
+    font-size: 1.5rem;
+    background-color: $main;
+    color: $text-color;
+    line-height: 1.5;
+  }
+
+  &__name {
+    position: absolute;
+    left: 50%;
+    top: 14.5rem;
+    width: 20rem;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    padding: 1rem 3rem;
+    color: $pure-white;
+    background-color: $secondary;
+  }
+}
+
+.rooms {
+  background-color: $secondary;
+  color: $pure-white;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  &__room {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2.4rem;
+    padding: 1.5rem;
+    border: 0.2rem solid $main;
+  }
+
+  &__img-box {
+    flex: 1 1 30rem;
+    position: relative;
+    overflow: hidden;
+    &:hover .rooms__img-caption{
+      transform: translateY(0);
+    }
+    &:hover .rooms__img{
+      transform: translateY(-30%);
+    }
+    
+  }
+  &__img-caption{
+    position: absolute;
+    left:0;
+    bottom:0;
+    width: 101%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform:translateY(100%);
+    background-color: $secondary;
+    transition: transform .3s ease-in;
+
+    p{
+      font-size:3rem;
+      font-weight: bolder
+    }
+  }
+
+  &__img {
+    width: 100%;
+    object-fit: cover;
+    transition: transform .3s ease-in;
+  }
+  &__price {
+    position: relative;
+    margin-top: 1rem;
+    font-size: 3rem;
+    font-style: italic;
+    color: $main;
+    z-index: 100;
+  }
+
+  &__price-time {
+    font-size: 1.6rem;
+    color: $pure-white;
+  }
+  &__desc {
+    flex: 1 1 40rem;
+  }
+  &__name {
+    font-family: "Oleo Script", cursive;
+    font-size: 3.3rem;
+  }
+  &__check-box {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    margin: 2rem 0;
+  }
+  &__check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    i {
+      font-size: 2rem;
+      color: $main;
+    }
+  }
+  &__check-p {
+    font-size: 1.4rem;
+    color: $text-color;
+  }
+
+  &__text {
+    font-size: 1.5rem;
+  }
+}
+
+.gallery {
+  padding-left: 0;
+  padding-right: 0;
+
+  .slide-img {
+    width: 100%;
+    height: 23rem;
+    object-fit: cover;
+  }
+}
+
+.testimonials {
+  background-image: linear-gradient(
+      308deg,
+      rgba(18, 18, 18, 0.7) 100%,
+      rgba(18, 18, 18, 0.7) 100%
+    ),
+    url("../images/hotel-testimonials-small.jpg");
+  background-size: cover;
+  background-position: cover;
+  background-attachment: fixed;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8rem;
+    margin-top: 8rem;
+  }
+
+  &__testimonial {
+    position: relative;
+    width: 100%;
+    padding: 5rem 2em 2rem 5rem;
+    background-color: $main;
+    z-index: 0;
+  }
+
+  &__avatar {
+    position: absolute;
+    top: -3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+  }
+
+  &__avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  &__quote {
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
+    color: $pure-white;
+    font-size: 4rem;
+  }
+
+  &__opinion {
+    padding: 1rem;
+    font-size: 1.5rem;
+
+    color: $text-color;
+    font-style: italic;
+  }
+
+  &__name {
+    font-size: 1.8rem;
+    text-align: right;
+    color: $pure-white;
+  }
+}
+
+.contact {
+  background-color: $secondary;
+  width: 100%;
+  color: $pure-white;
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    width: 100%;
+    padding: 1rem 2rem;
+    border: 0.3rem solid $main;
+  }
+
+  &__form {
+    flex: 1 1 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__input-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border: none;
+  }
+
+  &__label {
+    font-size: 1.7rem;
+  }
+
+  &__info {
+    flex: 1 1 40rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6rem;
+  }
+
+  &__text {
+    margin-bottom: 3.4rem;
+    font-size: 1.5rem;
+  }
+
+  &__social-media {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    i {
+      font-size: 4rem;
+      color: $main;
+      cursor: pointer;
+    }
+  }
+  &__row-1 {
+    flex: 1 1 17rem;
+  }
+  &__row-2 {
+    flex: 1 1 17rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  &__phone {
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 3rem;
+  }
+
+  &__phone-number {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    color: $text-color;
+  }
+  &__address {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+  }
+
+  &__heading {
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-family: "Oleo Script", cursive;
+  }
+
+  &__btn {
+    @include button;
+    padding: 1rem;
+    border: none;
+  }
+}
+
+.footer {
+  padding: 4rem 2rem;
+  background-color: $footer;
+
+  &__container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+  }
+
+  &__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+  }
+  &__link {
+    color: $pure-white;
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+  &__rights {
+    font-size: 1.8rem;
+    font-weight: bolder;
+    color: $pure-white;
+  }
+}
+
+@media (min-width: 576px) {
+  .testimonials {
+    &__avatar {
+      left: 80%;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .header {
+    padding-left: 3rem;
+
+    &__logo-link {
+      font-size: 2.4rem;
+    }
+
+    &__hamburger-btn {
+      right: 3rem;
+    }
+  }
+
+  .testimonials {
+    background: linear-gradient(
+        308deg,
+        rgba(18, 18, 18, 0.7) 100%,
+        rgba(18, 18, 18, 0.7) 100%
+      ),
+      url("../images/hotel-testimonials-big.jpg");
+    background-size: cover;
+    background-position: cover;
+  }
+
+  .home {
+    background-image: linear-gradient(
+        308deg,
+        rgba(18, 18, 18, 0.7) 100%,
+        rgba(18, 18, 18, 0.7) 100%
+      ),
+      url("../images/hotel-paradise-big.jpg");
+    &__heading {
+      font-size: 5rem;
+      margin: 1rem 0 4rem 0;
+    }
+    &__heading::after {
+      bottom: -1rem;
+    }
+
+    &__name {
+      font-size: 1.5rem;
+    }
+    &__desc {
+      font-size: 1.6rem;
+      margin-bottom: 3rem;
+    }
+  }
+  .book {
+    background: linear-gradient(
+        308deg,
+        rgba(237, 144, 101, 0.8) 100%,
+        rgba(237, 144, 101, 0.8) 100%
+      ),
+      url("../images/hotel-booking-big.jpg");
+  }
+  .about {
+    &__content {
+      text-align-last: left;
+    }
+
+    &__heading {
+      font-size: 2.5rem;
+    }
+
+    &__info {
+      margin: 4rem 0;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .services {
+    position: relative;
+    z-index: -1;
+    &__info {
+      margin-bottom: 6rem;
+    }
+    &__container {
+      min-height: 53rem;
+      gap: 4rem;
+    }
+    &__background {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 50%;
+      background-color: $secondary;
+      z-index: -1;
+    }
+    &__service {
+      &:nth-child(odd) {
+        align-self: start;
+      }
+      &:nth-child(even) {
+        align-self: end;
+      }
+    }
+  }
+}

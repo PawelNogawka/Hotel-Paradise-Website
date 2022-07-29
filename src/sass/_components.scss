@@ -1,0 +1,81 @@
+.section-padding {
+  padding: 3rem 2rem;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 130rem;
+  margin: 0 auto;
+}
+
+.wrapper-padding {
+  padding: 0 2rem;
+}
+
+.btn-animation {
+  z-index: 2;
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: $secondary;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    transform-origin: bottom left;
+    transform: rotate(-90deg);
+    transition: transform .5s;
+  }
+  &:hover::before {
+    transform: rotate(0);
+  }
+
+  &--2 {
+    &::before {
+      background-color: $main;
+    }
+  }
+}
+
+.section-heading {
+  position: relative;
+  margin-bottom: 5rem;
+  font-family: "Oleo Script", cursive;
+  font-size: 4.1rem;
+  text-align: left;
+  color: $secondary;
+  letter-spacing: 0.1rem;
+
+  &--white {
+    color: $pure-white;
+  }
+}
+
+.section-heading::after {
+  content: "";
+  position: absolute;
+  bottom: -0.4rem;
+  left: 0;
+  width: 14rem;
+  height: 0.3rem;
+  background-color: $main;
+}
+
+.section-info {
+  margin-bottom: 5rem;
+  font-size: 1.6rem;
+
+  &--white {
+    color: $pure-white;
+  }
+}
+
+@media (min-width: 992px) {
+  .section-heading {
+    font-size: 4rem;
+    margin-bottom: 6rem;
+  }
+}
